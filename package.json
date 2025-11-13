@@ -1,0 +1,20 @@
+{
+  "name": "shoppingcart-jest",
+  "version": "1.0.0",
+  "description": "I denna övning ska du få fixa till en e-handelssida som inte fungerar. En användare får en lista med produkter som den kan lägga till i en varukorg och sedan se sina tillagda produkter genom att klicka på länken **cart**.",
+  "homepage": "https://github.com/jakobmalmgren/shoppingCart-jest#readme",
+  "bugs": {
+    "url": "https://github.com/jakobmalmgren/shoppingCart-jest/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakobmalmgren/shoppingCart-jest.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

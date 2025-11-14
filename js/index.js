@@ -1,58 +1,5 @@
-// let shoppingCart = [];
-
-// let products = document.getElementsByClassName("button");
-
-// function updateCart() {
-//   document.querySelector("#productsInCart").innerText = shoppingCart.length;
-// }
-
-// function listProductsInCart() {
-//   let cartProducts = "";
-//   for (let i = 0; i < shoppingCart.length; i++) {
-//     cartProducts += `
-//       <li>
-//         <span class="product-title">Titel: </span>${shoppingCart[i]}
-//         <button class="remove-btn" data-index="${i}">Ta bort</button>
-//       </li>
-//     `;
-//   }
-//   document.querySelector("#products").innerHTML = cartProducts;
-
-//   // Lägg på event listeners på de nya remove-knapparna
-//   let removeBtn = document.getElementsByClassName("remove-btn");
-//   for (let i = 0; i < removeBtn.length; i++) {
-//     removeBtn[i].addEventListener("click", remove);
-//   }
-// }
-
-// // Loop through all buttons
-// for (let i = 0; i < products.length; i++) {
-//   products[i].addEventListener("click", (event) => {
-//     let product = event.target.parentNode.getAttribute("data-product");
-//     if (shoppingCart.includes(product)) {
-//       console.log("finns");
-//     } else {
-//       shoppingCart.push(product);
-//     }
-
-//     updateCart();
-//     listProductsInCart();
-//   });
-// }
-
-// // Toggle cart visibility
-// document.querySelector("#open-cart").addEventListener("click", () => {
-//   document.querySelector("#cart").classList.toggle("hide");
-// });
-
-// function remove(event) {
-//   let index = event.target.getAttribute("data-index"); // index i shoppingCart
-//   shoppingCart.splice(index, 1); // tar bort produkten från arrayen
-//   updateCart(); // uppdatera antal i kundvagnen
-//   listProductsInCart(); // uppdatera listan med produkter
-// }
-
 document.addEventListener("DOMContentLoaded", () => {
+  // DE HÄR FÖRSTÅR JA EJ?
   let shoppingCart = [];
 
   // Hämta alla "Add to cart"-knappar
@@ -89,7 +36,10 @@ document.addEventListener("DOMContentLoaded", () => {
       // Hitta närmaste artikel med data-product
       let product = event.target.closest(".card").getAttribute("data-product");
 
-      if (!shoppingCart.includes(product)) {
+      if (shoppingCart.includes(product)) {
+        // throw new Error("kan ej lägga till samma bok igen");
+        return;
+      } else {
         shoppingCart.push(product);
       }
 

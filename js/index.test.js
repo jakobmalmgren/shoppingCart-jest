@@ -62,7 +62,6 @@ const html = `  <body>
         </article>
       </section>
     </main>
-    <script src="js/index.js"></script>
   </body>`;
 // Allt sker i den fejkade jsdom-DOM, men med riktig JS-logik från index.js.
 
@@ -72,7 +71,7 @@ describe("functionality so the app works", () => {
     jest.resetModules(); // Återställar DOM och JS-skript inför varje test
     //När Node kör require laddas din riktiga JS-kod (index.js) och körs.
     require("./index.js");
-    // Triggera DOMContentLoaded manuellt
+    // Triggera DOMContentLoaded manuellt, DE HÄR FÖRSTÅR JA EJ?
     const event = new Event("DOMContentLoaded");
     document.dispatchEvent(event);
   });
@@ -97,6 +96,14 @@ describe("functionality so the app works", () => {
 
     // act
     fireEvent.click(buttons[0]); // lägg till första gången
+
+    // ville köra dena o ha tothrow men gick ej tydligen för
+    //fungerar bara för synkrona funktioner inte för eventlisterners
+    // som ja har i min JS fil..
+
+    // expect(() => fireEvent.click(buttons[0])).toThrow(
+    //   "kan ej lägga till samma bok igen"
+    // );
     fireEvent.click(buttons[0]); // försök lägga till samma bok igen
 
     // assert
@@ -110,11 +117,15 @@ describe("functionality so the app works", () => {
     // Lägg till en bok först
     fireEvent.click(buttons[0]);
 
+    //eftersom en bok har lagt till nu med :   fireEvent.click(buttons[0]);
+    // så finns därför ".remove-btn" som annars har genererats i JS filen
+    // och ingen ren HTML, så kan inte nå de direkt i de "fejkade DOM trädet ovan"
+
     // Nu genereras remove-knappen genom din listProductsInCart-funktion
     const removeButtons = document.querySelectorAll(".remove-btn");
     expect(removeButtons.length).toBe(1); // säkerställ att knappen finns
 
-    // Klicka på “Ta bort”-knappen
+    // Klicka på Ta bort knappen
     fireEvent.click(removeButtons[0]);
 
     // Kolla att varukorgen är tom och att listan är tom
@@ -122,3 +133,5 @@ describe("functionality so the app works", () => {
     expect(productsList).toHaveTextContent("");
   });
 });
+
+// lägga till felhantering med !!
